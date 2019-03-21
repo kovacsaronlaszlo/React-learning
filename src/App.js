@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Person from './Person/Person';
 
@@ -46,11 +45,10 @@ class App extends Component {
   }
 
   render() {
-    /**
-     * for inline Style
-     */
+    
     const style = {
-      backgroundColor: 'white',
+      backgroundColor: 'green',
+      color: 'white',
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
@@ -62,7 +60,6 @@ class App extends Component {
     if (this.state.showPersons) {
       persons = (
         <div>
-
           {this.state.persons.map((person, index) => {
             return <Person 
               click={() => this.deletePersonHandler(index)}
@@ -71,15 +68,25 @@ class App extends Component {
               key={person.id}
               changed={(event) => this.nameChangeHandler(event, person.id)} />
           })}
-
         </div>
       );
+      style.backgroundColor = 'red';
+    }
+
+    // let classes = ['red', 'bold'].join(' ');
+    const classes = [];
+    if (this.state.persons.length <= 2) {
+      classes.push('red');
+    }
+    if (this.state.persons.length <= 1) {
+      classes.push('bold');
     }
 
     return (
+
       <div className="App">
         <h1>hello, I am Lindsay Lohan</h1>
-        <p>sálálá</p>
+        <p className={classes.join(' ')}>sálálá</p>
         <button 
         style={style}
         onClick={this.togglePersonHandler}>
@@ -87,17 +94,8 @@ class App extends Component {
         </button>
         {persons}
       </div>
+
     );
-    /*
-    return React.createElement(
-      'div', 
-      {className: 'App'}, 
-      React.createElement(
-        'h1', 
-        null, 
-        'Hello, I am Lindsay Lohan'
-        )
-      );*/
   }
 }
 
